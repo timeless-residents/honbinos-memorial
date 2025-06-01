@@ -1,0 +1,1229 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ホンビノスメモリアル | 1000年の記憶継承</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .language-selector {
+            display: flex;
+            gap: 10px;
+        }
+
+        .lang-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .lang-btn:hover,
+        .lang-btn.active {
+            background: #764ba2;
+            transform: scale(1.05);
+        }
+
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><defs><linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:%23667eea;stop-opacity:1" /><stop offset="100%" style="stop-color:%23764ba2;stop-opacity:1" /></linearGradient></defs><rect width="1200" height="600" fill="url(%23grad1)"/><circle cx="200" cy="150" r="3" fill="white" opacity="0.8"/><circle cx="800" cy="100" r="2" fill="white" opacity="0.6"/><circle cx="400" cy="400" r="4" fill="white" opacity="0.7"/><circle cx="1000" cy="300" r="2" fill="white" opacity="0.5"/></svg>');
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: white;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            color: white;
+            padding: 15px 40px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.3);
+            transition: all 0.3s ease;
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(255, 107, 107, 0.4);
+        }
+
+        .section {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .section-alt {
+            background: #f8f9fa;
+        }
+
+        .section h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #2c3e50;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .feature {
+            text-align: center;
+            padding: 30px;
+            border-radius: 15px;
+            background: white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .feature:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .feature h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+
+        .plans {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .plan {
+            background: white;
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .plan:hover {
+            transform: scale(1.05);
+        }
+
+        .plan.premium {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            transform: scale(1.08);
+        }
+
+        .plan.premium:hover {
+            transform: scale(1.12);
+        }
+
+        .plan h3 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        .price {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #ff6b6b;
+            margin: 20px 0;
+        }
+
+        .plan.premium .price {
+            color: #ffd700;
+        }
+
+        .plan ul {
+            list-style: none;
+            margin: 30px 0;
+        }
+
+        .plan li {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .plan.premium li {
+            border-bottom-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 40px 0;
+        }
+
+        .lang-content {
+            display: none;
+        }
+
+        .lang-content.active {
+            display: block;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Mobile First Responsive Design */
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem;
+                line-height: 1.2;
+            }
+
+            .hero-content p {
+                font-size: 1rem;
+                line-height: 1.5;
+                padding: 0 10px;
+            }
+
+            .cta-button {
+                padding: 12px 30px;
+                font-size: 1rem;
+                width: 90%;
+                max-width: 300px;
+            }
+
+            .language-selector {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 5px;
+            }
+
+            .lang-btn {
+                padding: 6px 10px;
+                font-size: 0.8rem;
+                min-width: 60px;
+            }
+
+            .section {
+                padding: 60px 0;
+            }
+
+            .section h2 {
+                font-size: 1.8rem;
+                margin-bottom: 2rem;
+                line-height: 1.3;
+            }
+
+            .plans {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .plan {
+                padding: 30px 20px;
+                margin: 0 10px;
+            }
+
+            .plan h3 {
+                font-size: 1.4rem;
+            }
+
+            .price {
+                font-size: 2rem;
+            }
+
+            .plan li {
+                font-size: 0.9rem;
+                padding: 6px 0;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .feature {
+                padding: 25px 20px;
+            }
+
+            .feature-icon {
+                font-size: 2.5rem;
+            }
+
+            .feature h3 {
+                font-size: 1.3rem;
+            }
+
+            .feature p {
+                font-size: 0.9rem;
+                line-height: 1.6;
+            }
+
+            .contact-form {
+                padding: 30px 20px;
+                margin: 0 10px;
+            }
+
+            .form-group input,
+            .form-group select,
+            .form-group textarea {
+                padding: 15px 12px;
+                font-size: 16px;
+                /* Prevents zoom on iOS */
+                border-radius: 8px;
+            }
+
+            .submit-btn {
+                padding: 18px;
+                font-size: 1.1rem;
+                border-radius: 8px;
+            }
+
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+                padding: 10px 0;
+            }
+
+            .logo {
+                font-size: 1.4rem;
+                text-align: center;
+            }
+
+            /* Touch-friendly improvements */
+            .cta-button,
+            .lang-btn,
+            .submit-btn {
+                min-height: 44px;
+                /* Apple's recommended touch target */
+                touch-action: manipulation;
+            }
+
+            /* Prevent horizontal scroll */
+            body {
+                overflow-x: hidden;
+            }
+        }
+
+        @media (max-width: 768px) and (min-width: 481px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-content p {
+                font-size: 1.1rem;
+            }
+
+            .plans {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            .features {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 30px;
+            }
+
+            .header-content {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .contact-form {
+                padding: 35px 25px;
+            }
+        }
+
+        @media (max-width: 1024px) and (min-width: 769px) {
+            .features {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .plans {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Landscape phone optimization */
+        @media (max-height: 500px) and (orientation: landscape) {
+            .hero {
+                height: auto;
+                min-height: 100vh;
+                padding: 80px 0 40px;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem;
+                margin-bottom: 0.5rem;
+            }
+
+            .hero-content p {
+                font-size: 1rem;
+                margin-bottom: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <span class="logo-text">ホンビノスメモリアル</span>
+                </div>
+                <div class="language-selector">
+                    <button class="lang-btn active" onclick="changeLanguage('ja')" data-lang="ja">日本語</button>
+                    <button class="lang-btn" onclick="changeLanguage('en')" data-lang="en">English</button>
+                    <button class="lang-btn" onclick="changeLanguage('zh')" data-lang="zh">中文</button>
+                    <button class="lang-btn" onclick="changeLanguage('ko')" data-lang="ko">한국어</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Japanese Content -->
+    <div class="lang-content active" id="ja">
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>1000年の記憶継承</h1>
+                    <p>世界初の生命体情報刻印技術で、愛する人の記憶を永遠に。<br>災害を超越した、新しい追悼文化の誕生。</p>
+                    <a href="#contact" class="cta-button">無料相談を申し込む</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <h2>なぜホンビノスメモリアルなのか</h2>
+                <div class="features">
+                    <div class="feature">
+                        <div class="feature-icon">🐚</div>
+                        <h3>500-1000年の永続性</h3>
+                        <p>考古学的に実証されたホンビノス貝殻の驚異的な保存性能。どんな天災にも負けません。</p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">⚡</div>
+                        <h3>世界初の刻印技術</h3>
+                        <p>生命体への情報刻印という前例なき技術。人生の本質を150文字に昇華する究極の編集体験。</p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">🏔️</div>
+                        <h3>聖地のエネルギー封入</h3>
+                        <p>雲際寺・永平寺・ハレアカラ・浦安の四大災害観測地の砂で、記憶を永遠に守護。</p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">👨‍👩‍👧‍👦</div>
+                        <h3>永代継承システム</h3>
+                        <p>3世代にわたって自動継承される革新的システム。家族の絆を1000年先まで。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section section-alt">
+            <div class="container">
+                <h2>プラン・料金</h2>
+                <div class="plans">
+                    <div class="plan">
+                        <h3>浦安の守り</h3>
+                        <div class="price">35万円</div>
+                        <ul>
+                            <li>✓ 基本情報記録（25文字）</li>
+                            <li>✓ 浦安復興土封入</li>
+                            <li>✓ 100年品質保証</li>
+                            <li>✓ 透明レジン保護</li>
+                        </ul>
+                    </div>
+
+                    <div class="plan">
+                        <h3>東西の調和</h3>
+                        <div class="price">85万円</div>
+                        <ul>
+                            <li>✓ 詳細記録（75文字）</li>
+                            <li>✓ 浦安＋ハレアカラ砂封入</li>
+                            <li>✓ QRコード連携</li>
+                            <li>✓ 200年品質保証</li>
+                        </ul>
+                    </div>
+
+                    <div class="plan premium">
+                        <h3>円環完成</h3>
+                        <div class="price">650万円</div>
+                        <ul>
+                            <li>✓ 人生の本質記録（150文字）</li>
+                            <li>✓ 四聖地すべての砂封入</li>
+                            <li>✓ 四聖地巡礼（10年間）</li>
+                            <li>✓ 永代継承設計</li>
+                            <li>✓ 1000年品質保証</li>
+                            <li>✓ Bounderist哲学継承</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- English Content -->
+    <div class="lang-content" id="en">
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>1000-Year Memory Legacy</h1>
+                    <p>World's first biotechnology memory preservation.<br>Eternal memories that transcend disasters and
+                        time.</p>
+                    <a href="#contact" class="cta-button">Free Consultation</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <h2>Why Honbinos Memorial?</h2>
+                <div class="features">
+                    <div class="feature">
+                        <div class="feature-icon">🐚</div>
+                        <h3>500-1000 Year Durability</h3>
+                        <p>Archaeologically proven preservation power of Honbinos shells. Survives any natural disaster.
+                        </p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">⚡</div>
+                        <h3>World's First Bio-Engraving</h3>
+                        <p>Revolutionary technology for engraving information on living organisms. 200-300 character
+                            capacity.</p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">🏔️</div>
+                        <h3>Sacred Land Energy Sealing</h3>
+                        <p>Protected by sacred sands from four disaster observation sites: Unsa-ji, Eihei-ji, Haleakala,
+                            Urayasu.</p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">👨‍👩‍👧‍👦</div>
+                        <h3>Eternal Heritage System</h3>
+                        <p>Innovative automatic inheritance system across 3 generations. Family bonds preserved for 1000
+                            years.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section section-alt">
+            <div class="container">
+                <h2>Plans & Pricing</h2>
+                <div class="plans">
+                    <div class="plan">
+                        <h3>Japan Experience</h3>
+                        <div class="price">$2,500</div>
+                        <ul>
+                            <li>✓ Basic info recording (50 chars)</li>
+                            <li>✓ Urayasu resilience sand sealed</li>
+                            <li>✓ 100-year guarantee</li>
+                            <li>✓ Transparent resin protection</li>
+                        </ul>
+                    </div>
+
+                    <div class="plan">
+                        <h3>Zen Journey</h3>
+                        <div class="price">$6,000</div>
+                        <ul>
+                            <li>✓ Detailed recording (150 chars)</li>
+                            <li>✓ Urayasu + Haleakala sand</li>
+                            <li>✓ QR code integration</li>
+                            <li>✓ 200-year guarantee</li>
+                        </ul>
+                    </div>
+
+                    <div class="plan premium">
+                        <h3>Samurai Spirit</h3>
+                        <div class="price">$45,000</div>
+                        <ul>
+                            <li>✓ Maximum capacity (300 chars)</li>
+                            <li>✓ All four sacred sands</li>
+                            <li>✓ Sacred pilgrimage (10 years)</li>
+                            <li>✓ Heritage design included</li>
+                            <li>✓ 1000-year guarantee</li>
+                            <li>✓ Bounderist philosophy heritage</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Chinese Content -->
+    <div class="lang-content" id="zh">
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>千年记忆传承</h1>
+                    <p>世界首创生物体信息刻印技术。<br>让珍贵记忆永远超越灾难与时间。</p>
+                    <a href="#contact" class="cta-button">免费咨询</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <h2>为什么选择河蚬纪念品？</h2>
+                <div class="features">
+                    <div class="feature">
+                        <div class="feature-icon">🐚</div>
+                        <h3>500-1000年耐久性</h3>
+                        <p>考古学证实的河蚬贝壳惊人保存性能。能够承受任何自然灾害。</p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">⚡</div>
+                        <h3>世界首创刻印技术</h3>
+                        <p>在生物体上刻印信息的革命性技术。可记录200-300个字符的大容量信息。</p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">🏔️</div>
+                        <h3>圣地能量封印</h3>
+                        <p>用来自云际寺、永平寺、哈雷阿卡拉、浦安四大灾害观测地的圣砂保护记忆。</p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">👨‍👩‍👧‍👦</div>
+                        <h3>永代传承系统</h3>
+                        <p>跨越3代的创新自动传承系统。家族纽带保存千年。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section section-alt">
+            <div class="container">
+                <h2>方案与价格</h2>
+                <div class="plans">
+                    <div class="plan">
+                        <h3>日本体验</h3>
+                        <div class="price">¥18,000</div>
+                        <ul>
+                            <li>✓ 基本信息记录（50字）</li>
+                            <li>✓ 浦安复兴砂封入</li>
+                            <li>✓ 100年品质保证</li>
+                            <li>✓ 透明树脂保护</li>
+                        </ul>
+                    </div>
+
+                    <div class="plan">
+                        <h3>禅宗之旅</h3>
+                        <div class="price">¥43,000</div>
+                        <ul>
+                            <li>✓ 详细记录（150字）</li>
+                            <li>✓ 浦安+哈雷阿卡拉砂</li>
+                            <li>✓ 二维码联动</li>
+                            <li>✓ 200年品质保证</li>
+                        </ul>
+                    </div>
+
+                    <div class="plan premium">
+                        <h3>武士精神</h3>
+                        <div class="price">¥320,000</div>
+                        <ul>
+                            <li>✓ 最大容量记录（300字）</li>
+                            <li>✓ 四大圣地砂封入</li>
+                            <li>✓ 圣地朝圣（10年）</li>
+                            <li>✓ 传承设计</li>
+                            <li>✓ 1000年品质保证</li>
+                            <li>✓ 武士道哲学传承</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Korean Content -->
+    <div class="lang-content" id="ko">
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>천년 기억 계승</h1>
+                    <p>세계 최초 생명체 정보 각인 기술.<br>재해를 초월한 영원한 기억 보존.</p>
+                    <a href="#contact" class="cta-button">무료 상담</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <h2>왜 혼비노스 메모리얼인가?</h2>
+                <div class="features">
+                    <div class="feature">
+                        <div class="feature-icon">🐚</div>
+                        <h3>500-1000년 영속성</h3>
+                        <p>고고학적으로 입증된 혼비노스 조개껍질의 놀라운 보존 성능. 어떤 자연재해도 견딥니다.</p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">⚡</div>
+                        <h3>세계 최초 각인 기술</h3>
+                        <p>생명체에 정보를 각인하는 전례 없는 기술. 200-300자의 대용량 기록 가능.</p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">🏔️</div>
+                        <h3>성지 에너지 봉인</h3>
+                        <p>운사이지, 에이헤이지, 할레아칼라, 우라야스 4대 재해 관측지의 모래로 기억을 영원히 수호.</p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">👨‍👩‍👧‍👦</div>
+                        <h3>영대 계승 시스템</h3>
+                        <p>3세대에 걸쳐 자동 계승되는 혁신적 시스템. 가족의 유대를 천년까지.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section section-alt">
+            <div class="container">
+                <h2>플랜 & 가격</h2>
+                <div class="plans">
+                    <div class="plan">
+                        <h3>일본 체험</h3>
+                        <div class="price">₩3,500,000</div>
+                        <ul>
+                            <li>✓ 기본 정보 기록 (50자)</li>
+                            <li>✓ 우라야스 복구 모래 봉입</li>
+                            <li>✓ 100년 품질 보증</li>
+                            <li>✓ 투명 레진 보호</li>
+                        </ul>
+                    </div>
+
+                    <div class="plan">
+                        <h3>선 여행</h3>
+                        <div class="price">₩8,500,000</div>
+                        <ul>
+                            <li>✓ 상세 기록 (150자)</li>
+                            <li>✓ 우라야스+할레아칼라 모래</li>
+                            <li>✓ QR코드 연동</li>
+                            <li>✓ 200년 품질 보증</li>
+                        </ul>
+                    </div>
+
+                    <div class="plan premium">
+                        <h3>사무라이 정신</h3>
+                        <div class="price">₩65,000,000</div>
+                        <ul>
+                            <li>✓ 최대 용량 기록 (300자)</li>
+                            <li>✓ 4대 성지 모래 봉입</li>
+                            <li>✓ 성지 순례 (10년간)</li>
+                            <li>✓ 계승 설계</li>
+                            <li>✓ 1000년 품질 보증</li>
+                            <li>✓ 바운더리스트 철학 계승</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <section class="section" id="contact">
+        <div class="container">
+            <h2>
+                <span class="contact-title-ja">お申し込み・無料相談</span>
+                <span class="contact-title-en">Application & Free Consultation</span>
+                <span class="contact-title-zh">申请与免费咨询</span>
+                <span class="contact-title-ko">신청 및 무료 상담</span>
+            </h2>
+            <div class="contact-form">
+                <form>
+
+                    <div class="form-group">
+                        <label for="name">
+                            <span class="label-ja">お名前 *</span>
+                            <span class="label-en">Name *</span>
+                            <span class="label-zh">姓名 *</span>
+                            <span class="label-ko">성명 *</span>
+                        </label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">
+                            <span class="label-ja">メールアドレス *</span>
+                            <span class="label-en">Email *</span>
+                            <span class="label-zh">邮箱 *</span>
+                            <span class="label-ko">이메일 *</span>
+                        </label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">
+                            <span class="label-ja">電話番号</span>
+                            <span class="label-en">Phone</span>
+                            <span class="label-zh">电话</span>
+                            <span class="label-ko">전화번호</span>
+                        </label>
+                        <input type="tel" id="phone" name="phone">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="language">
+                            <span class="label-ja">希望言語</span>
+                            <span class="label-en">Preferred Language</span>
+                            <span class="label-zh">首选语言</span>
+                            <span class="label-ko">희망 언어</span>
+                        </label>
+                        <select id="language" name="language">
+                            <option value="ja">日本語</option>
+                            <option value="en">English</option>
+                            <option value="zh">中文</option>
+                            <option value="ko">한국어</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="plan">
+                            <span class="label-ja">ご希望プラン</span>
+                            <span class="label-en">Preferred Plan</span>
+                            <span class="label-zh">首选方案</span>
+                            <span class="label-ko">희망 플랜</span>
+                        </label>
+                        <select id="plan" name="plan">
+                            <option value="">
+                                <span class="option-ja">プランを選択してください</span>
+                                <span class="option-en">Select a plan</span>
+                                <span class="option-zh">请选择方案</span>
+                                <span class="option-ko">플랜을 선택하세요</span>
+                            </option>
+                            <option value="basic">
+                                <span class="option-ja">浦安の守り（35万円）</span>
+                                <span class="option-en">Japan Experience ($2,500)</span>
+                                <span class="option-zh">日本体验（¥18,000）</span>
+                                <span class="option-ko">일본 체험（₩3,500,000）</span>
+                            </option>
+                            <option value="standard">
+                                <span class="option-ja">東西の調和（85万円）</span>
+                                <span class="option-en">Zen Journey ($6,000)</span>
+                                <span class="option-zh">禅宗之旅（¥43,000）</span>
+                                <span class="option-ko">선 여행（₩8,500,000）</span>
+                            </option>
+                            <option value="premium">
+                                <span class="option-ja">円環完成（650万円）</span>
+                                <span class="option-en">Samurai Spirit ($45,000)</span>
+                                <span class="option-zh">武士精神（¥320,000）</span>
+                                <span class="option-ko">사무라이 정신（₩65,000,000）</span>
+                            </option>
+                            <option value="consultation">
+                                <span class="option-ja">まずは無料相談</span>
+                                <span class="option-en">Free consultation first</span>
+                                <span class="option-zh">先进行免费咨询</span>
+                                <span class="option-ko">먼저 무료 상담</span>
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">
+                            <span class="label-ja">メッセージ・ご質問</span>
+                            <span class="label-en">Message & Questions</span>
+                            <span class="label-zh">留言与问题</span>
+                            <span class="label-ko">메시지 및 질문</span>
+                        </label>
+                        <textarea id="message" name="message" rows="5"></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-btn">
+                        <span class="submit-ja">お申し込み・相談する</span>
+                        <span class="submit-en">Apply / Consult</span>
+                        <span class="submit-zh">申请/咨询</span>
+                        <span class="submit-ko">신청/상담</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Honbinos Memorial. All rights reserved.</p>
+            <p>
+                <span class="footer-ja">創設者：佐藤卓也（Bounderist）｜ 浦安市から世界へ</span>
+                <span class="footer-en">Founder: Takuya Sato (Bounderist) | From Urayasu to the World</span>
+                <span class="footer-zh">创始人：佐藤卓也（境界超越者）| 从浦安到世界</span>
+                <span class="footer-ko">창립자: 사토 타쿠야 (바운더리스트) | 우라야스에서 세계로</span>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        let currentLang = 'ja';
+
+        function changeLanguage(lang) {
+            // Hide all language content
+            document.querySelectorAll('.lang-content').forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // Show selected language content
+            document.getElementById(lang).classList.add('active');
+
+            // Update language buttons
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelector(`[data-lang="${lang}"]`).classList.add('active');
+
+            // Update logo text
+            const logoTexts = {
+                'ja': 'ホンビノスメモリアル',
+                'en': 'Honbinos Memorial',
+                'zh': '河蚬纪念品',
+                'ko': '혼비노스 메모리얼'
+            };
+            document.querySelector('.logo-text').textContent = logoTexts[lang];
+
+            // Update form labels and contact section
+            updateFormLabels(lang);
+
+            currentLang = lang;
+
+            // Update document language
+            document.documentElement.lang = lang;
+        }
+
+        function updateFormLabels(lang) {
+            // Hide all language-specific elements
+            const elements = [
+                '.contact-title-ja', '.contact-title-en', '.contact-title-zh', '.contact-title-ko',
+                '.label-ja', '.label-en', '.label-zh', '.label-ko',
+                '.submit-ja', '.submit-en', '.submit-zh', '.submit-ko',
+                '.footer-ja', '.footer-en', '.footer-zh', '.footer-ko'
+            ];
+
+            elements.forEach(selector => {
+                document.querySelectorAll(selector).forEach(el => {
+                    el.style.display = 'none';
+                });
+            });
+
+            // Show current language elements
+            const showSelectors = [
+                `.contact-title-${lang}`,
+                `.label-${lang}`,
+                `.submit-${lang}`,
+                `.footer-${lang}`
+            ];
+
+            showSelectors.forEach(selector => {
+                document.querySelectorAll(selector).forEach(el => {
+                    el.style.display = 'inline';
+                });
+            });
+        }
+
+        // Initialize with Japanese
+        updateFormLabels('ja');
+
+        // Mobile-optimized smooth scroll with offset for fixed header
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                const headerHeight = document.querySelector('header').offsetHeight;
+                const targetPosition = target.offsetTop - headerHeight - 20;
+
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // LINE WORKS連携フォーム送信
+        document.querySelector('form').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+
+            // 追加データ
+            data.language = currentLang;
+            data.userAgent = navigator.userAgent;
+            data.screenSize = `${screen.width}x${screen.height}`;
+            data.timestamp = new Date().toISOString();
+
+            // 送信ボタンの状態変更
+            const submitBtn = this.querySelector('.submit-btn');
+            const originalText = submitBtn.innerHTML;
+
+            const loadingMessages = {
+                'ja': '送信中...',
+                'en': 'Sending...',
+                'zh': '发送中...',
+                'ko': '전송 중...'
+            };
+
+            submitBtn.innerHTML = loadingMessages[currentLang];
+            submitBtn.disabled = true;
+
+            // Google Apps Script URL
+            const gasUrl = 'https://script.google.com/macros/s/AKfycbwszaLW6YJ8Ui3ZSHZkY8OtY53jxczw2b3NhxUaT9tx1TBcjwqmeuqL04Vydr3lrCGiUQ/exec';
+
+            fetch(gasUrl, {
+                method: 'POST',
+                mode: 'no-cors', // CORS回避
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            })
+                .then(() => {
+                    // 成功メッセージ
+                    const successMessages = {
+                        'ja': '✅ お申し込みありがとうございます。48時間以内にご連絡いたします。',
+                        'en': '✅ Thank you! We will contact you within 48 hours.',
+                        'zh': '✅ 感谢申请！我们将在48小时内联系您。',
+                        'ko': '✅ 감사합니다! 48시간 이내에 연락드리겠습니다.'
+                    };
+
+                    alert(successMessages[currentLang]);
+                    this.reset();
+
+                    // モバイルでトップにスクロール
+                    if (window.innerWidth <= 768) {
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    // エラーメッセージ
+                    const errorMessages = {
+                        'ja': '❌ 送信に失敗しました。メールでご連絡ください：business@satotakuya.jp',
+                        'en': '❌ Failed to send. Please email: business@satotakuya.jp',
+                        'zh': '❌ 发送失败。请发邮件：business@satotakuya.jp',
+                        'ko': '❌ 전송 실패. 이메일로 연락주세요: business@satotakuya.jp'
+                    };
+                    alert(errorMessages[currentLang]);
+                })
+                .finally(() => {
+                    // ボタンを元に戻す
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                });
+        });
+
+        // Mobile-optimized header scroll effect
+        let lastScrollTop = 0;
+        window.addEventListener('scroll', function () {
+            const header = document.querySelector('header');
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+            // Change header background
+            if (scrollTop > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0.98)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+            }
+
+            // Hide header on scroll down, show on scroll up (mobile only)
+            if (window.innerWidth <= 768) {
+                if (scrollTop > lastScrollTop && scrollTop > 200) {
+                    header.style.transform = 'translateY(-100%)';
+                } else {
+                    header.style.transform = 'translateY(0)';
+                }
+            }
+
+            lastScrollTop = scrollTop;
+        });
+
+        // Mobile touch optimization
+        if ('ontouchstart' in window) {
+            document.body.classList.add('touch-device');
+
+            // Improve touch responsiveness
+            document.querySelectorAll('.cta-button, .lang-btn, .submit-btn, .plan').forEach(element => {
+                element.addEventListener('touchstart', function () {
+                    this.style.transform = 'scale(0.98)';
+                });
+
+                element.addEventListener('touchend', function () {
+                    this.style.transform = '';
+                });
+            });
+        }
+
+        // Prevent zoom on iOS when focusing inputs
+        if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+            document.addEventListener('touchstart', function () {
+                document.querySelectorAll('input, select, textarea').forEach(input => {
+                    if (input.style.fontSize !== '16px') {
+                        input.style.fontSize = '16px';
+                    }
+                });
+            });
+        }
+
+        // Mobile performance optimization
+        window.addEventListener('load', function () {
+            // Lazy load non-critical elements on mobile
+            if (window.innerWidth <= 768) {
+                const features = document.querySelectorAll('.feature');
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.style.opacity = '1';
+                            entry.target.style.transform = 'translateY(0)';
+                        }
+                    });
+                });
+
+                features.forEach(feature => {
+                    feature.style.opacity = '0';
+                    feature.style.transform = 'translateY(20px)';
+                    feature.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                    observer.observe(feature);
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>
